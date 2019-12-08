@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>mobx vs redux</h1>
+					<p>Both used for state management in react lets find their differences!</p>
+				</section>
+				<section>
+					<section>
+						<img src="img/mobx_icon.png" height="300px">
+						<h2>MobX</h2>
+					</section>
+					<section>
+						<h3>battle tested</h3>
+						<p>MobX is used in many apps for many years!</p>
+					</section>
+					<section>
+						<h3>simple</h3>
+						<p>
+							MobX is fast to learn and easy to add to youre app, and most 
+							of the time requires a small amount of code to function!
+						</p>
+					</section>
+					<section>
+						<h3>fast</h3>
+						<p>MobX providing a good perfomance!</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="img/mobx_core.png" alt="" height="300px">
+						<h2>mobx core principles</h2>
+					</section>
+					<section>
+						MobX can have multiple stores to store the state of the application
+					</section>
+					<section>
+						Anything that can be derived from the state without any further interaction is a derivation
+					</section>
+					<section>
+						Action is any piece of code that can change the state
+					</section>
+					<section>
+						All derivations are updated automatically and atomically when the state changes
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="img/redux_icon.svg" height="300px">
+						<h2>Redux</h2>
+					</section>
+					<section>
+						<h3>Predictable</h3>
+						<p>
+							Redux helps you write applications that behave consistently, 
+							run in different environments (client, server, and native), 
+							and are easy to test.
+						</p>
+					</section>
+					<section>
+						<h3>Centralized</h3>
+						<p>
+							Centralizing your application's state and logic enables 
+							powerful capabilities like undo/redo, state persistence, 
+							and much more.
+						</p>
+					</section>
+					<section>
+						<h3>Debuggable</h3>
+						<p>
+							The Redux DevTools make it easy to trace when, where, 
+							why, and how your application's state changed. Redux's 
+							architecture lets you log changes, use "time-travel debugging", 
+							and even send complete error reports to a server.
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="img/redux_core.jpg" alt="" height="300px">
+						<h2>redux core principles</h2>
+					</section>
+					<section>
+						Redux has a single store – a single source of truth
+					</section>
+					<section>
+						The state in the store is immutable
+					</section>
+					<section>
+						Actions invoke changes to the store
+					</section>
+					<section>
+						Reducers update state
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="img/comparison.png" alt="" height="300px">
+						<h2>Comparison</h2>
+					</section>
+					<section>
+						<h2>Written in</h2>
+						<p>Redux: written in ES6.</p>
+						<p>MobX: written in JS & TS.</p>
+					</section>
+					<section>
+						<h2>Data store</h2>
+						<p>Redux: one large store for data storage</p>
+						<p>MobX: More than one store for data storage</p>
+					</section>
+					<section>
+						<h2>Apllication</h2>
+						<p>Redux: mainly used in large and comlpex applications!</p>
+						<p>MobX: used for small and simple applications!</p>
+					</section>
+					<section>
+						<h2>Scale ability</h2>
+						<p>Redux: mainly used for scalable applications</p>
+						<p>MobX: less scalable</p>
+					</section>
+					<section>
+						<h2>Perfomance</h2>
+						<p>Redux: not much efficient</p>
+						<p>MobX: provides good perfomance</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="img/code_icon.png" height="400px">
+						<h2>Code examples!</h2>
+					</section>
+					<section>
+						<h3>Props injection mobx</h3>
+						<pre class="javascript">
+							<code data-trim data-noescape>
+								// src/pages/contact-form-page.js
+								//...some code...
+								@inject("stores") @observer // injecting store into props
+								class ContactFormPage extends Component {
+								  //...some code...
+								  // accessing store via props
+								  const { contactStore: store } = this.props.stores;
+								  return (
+								    &ltContactForm
+								      store={store}
+								      form={this.form}
+								      contact={store.entity}
+								    /&gt
+								  )
+								}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Props injection redux</h3>
+						<pre class="javascript">
+							<code data-trim data-noescape>
+								// src/pages/contact-form-page.js
+								//...some code...
+								// accessing props
+								&ltContactForm
+								  contact={this.props.contact}
+								  loading={this.props.loading}
+								  onSubmit={this.submit}
+								/&gt
+								//...some code...
+								// function for injecting state into props
+								function mapStateToProps(state) {
+								  return {
+								    contact: state.contactStore.contact,
+								    errors: state.contactStore.errors
+								  }
+								}
+								// injecting both state and actions into props
+								export default connect(mapStateToProps, { newContact,
+								  saveContact,
+								  fetchContact,
+								  updateContact
+								})(ContactFormPage);
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Defining stores, actions, and reducers</h3>
+						<pre class="javascript">
+							<code data-trim data-noescape>
+								// src/actions/contact-actions.js
+								//...some code...
+								export function fetchContacts(){
+								  return dispatch => {
+								    dispatch({
+								      type: 'FETCH_CONTACTS',
+								      payload: client.get(url)
+								    })
+								  }
+								}
+								//...some code...
+								// src/reducers/contact-reducer
+								//...some code...
+								switch (action.type) {
+								  case 'FETCH_CONTACTS_FULFILLED': {
+								    return {
+								      ...state,
+								      contacts: action.payload.data.data || action.payload.data,
+								      loading: false,
+								      errors: {}
+								    }
+								  }
+								  case 'FETCH_CONTACTS_PENDING': {
+								    return {
+								      ...state,
+								      loading: true,
+								      errors: {}
+								    }
+								  }
+								  case 'FETCH_CONTACTS_REJECTED': {
+								    return {
+								      ...state,
+								      loading: false,
+								      errors: { global: action.payload.message }
+								    }
+								  }
+								}
+								//...some code...
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h3>mobx version</h3>
+						<pre class="javascript">
+							<code data-trim data-noescape>
+								// src/stores/store.js
+								//...some code...
+								@action
+								fetchAll = async() => {
+								  this.loading = true;
+								  this.errors = {};
+								  try {
+								    const response = await this.service.find({})
+								    runInAction('entities fetched', () => {
+								      this.entities = response.data;
+								      this.loading = false;
+								    });
+								  } catch(err) {
+								    this.handleErrors(err);
+								  }
+								}
+								//...some code...
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section><h2>Conclusion</h2></section>
+					<section>
+						<p>
+							Redux and Mobx both are the libraries which are used 
+							to manage the application state in one way or the other. 
+							These both Redux vs Mobx are mainly combined with front-end 
+							libraries like react and angular to develop the user interfaces 
+							more interactive and to show the changing the data over the time.
+						</p>
+					</section>
+					<section>
+						<p>
+							Mobx is mainly preferred to use for the beginners as it is simple 
+							and easy to learn. Redux can be preferred for those who have a strong 
+							understanding of functional programming skills. It has been seen that 
+							Redux is well established and popular among the developers whereas Mobx 
+							is not that popular, but Mobx can be the good alternative for managing 
+							the state of the application.
+						</p>
+					</section>
+					<section>
+						<p>
+							Mobx vs Redux both are great libraries to work on and these can be 
+							selected depending on the requirements and availability of resources. 
+							Happy learning!!
+						</p>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
